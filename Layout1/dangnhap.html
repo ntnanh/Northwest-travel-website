@@ -1,0 +1,71 @@
+<?php 
+include '../classes/adminlogin.php';
+
+ ?>
+ <?php 
+ $class = new adminlogin();
+ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+ 	$adminUser = $_POST['adminUser'];
+ 	$adminPass =md5($_POST['adminPass']);
+ 	$login_check = $class->login_admin($adminUser,$adminPass);
+ 	# code...
+ }
+  ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Đăng Nhập</title>
+	<link rel="stylesheet" href="css/dangnhap.css">
+</head>
+<body>
+	<div class="hero">
+		<div class="form-box">
+			<div class="button-box">
+				<div id="btn"></div>
+				<button type="button" class="toggle-btn" onclick="dangnhap()">Đăng nhập</button>
+				
+			</div>
+			<div class="social-icons">
+			<a href="https://www.facebook.com/"><img src="images/fb.png" alt="images"></a>
+			<a href="https://twitter.com/login"><img src="images/tw.png" alt="images"></a>
+			<a href="https://accounts.google.com/"><img src="images/gp.png" alt="images"></a>
+		    </div>
+		    <form id="dangnhap" class="input-group" action="login.php" method="post">
+		    	<span>
+			<?php 
+			if(isset($login_check)){
+				echo $login_check;
+			}
+
+			?>
+			 	
+			 </span>
+		         <input type="text" class="input-field" placeholder="Tên đăng nhập" required>
+		         <input type="text" class="input-field" placeholder="Mật khẩu" required>
+		         <input type="checkbox" class="chech-box"><span>Nhớ mật khẩu</span>
+		         <button type="submit" class="submit-btn">Đăng Nhập</button>
+		    </form>
+		    
+		</div>
+		
+	</div>
+	<script>
+		var x = document.getElementById("dangnhap");
+		var y = document.getElementById("dangki");
+		var z = document.getElementById("btn");
+
+		function dangki(){
+			x.style.left = "-400px";
+			y.style.left = "50px"
+			z.style.left = "110px";
+		}
+		function dangnhap(){
+			x.style.left = "50px";
+			y.style.left = "450px"
+			z.style.left = "0";
+		}
+	</script>
+	
+</body>
+</html>
